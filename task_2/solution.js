@@ -8,17 +8,17 @@ function calcShipping(sum, min, shipping) {
     // создайте переменную shippingSum
 let shippingSum;
     // если productsSum равно 0,
-    IF (productsSum == 0) 
     // то shippingSum присвоить значение 0
-    {shippingSum = 0;} 
     // если productsSum Больше или равна freeShippingMinSum,
-    if (productsSum >= freeShippingMinSum)
     // то shippingSum присвоить значение 0
-{shippingSum = 0;}
+    if (productSum == 0 || productSum >= freeShippingMinSum) {
+        shippingSum = 0;
+    }  
     // если productsSum больше 0 и меньше freeShippingMinSum,
-if (productsSum > 0 && productsSum < freeShippingMinSum)
+if (productSum > 0 && productSum < freeShippingMinSum) {
     // то shippingSum присвоить значение shippingPrice
-{shippingSum = shippingPrice;}
+shippingSum = shippingPrice;
+}
     // Конец решения задания №2.1.
 
     return shippingSum;
@@ -34,14 +34,16 @@ function calcDiscount(sum, min, discount) {
     // создайте переменную discountPrice
 let discountPrice;
     // если productsSum больше или равно discountMinSum,
-    IF (productsSum >= discountMinSum)
+    if (productsSum >= discountMinSum) {
     // то присвойте discountPrice значение discountPart процентов от productsSum,
-    {discountPrice = productsSum * discountPart;} 
+    discountPrice =  (discountPart * productsSum) / 100;
+} else {
     // иначе присвойте discountPrice значения 0
-  {discountPrice = 0;}
+  discountPrice = 0;
+}
     // Конец решения задания №2.2./
 
-    return discountSum;
+    return discountPrice;
 }
 
 function calcInvoice({sum, discountMinSum, discountPart, shippingFreeMinSum, shippingPrice}) {
@@ -61,10 +63,10 @@ totalSum = totalSum - discountSum;
     // прибавьте к totalSum значение shippingSum
 totalSum = totalSum + shippingSum;
     // создайте переменную freeShipping
-    let freeShipping;
+    let freeShipping = shippingSum == 0;
     // запишите без использования if или любых других условий:
     // если shippingSum равно нулю, то freeShipping должна быть равна true, иначе freeShipping должна быть равна false
-    freeShipping = true == 0;
+
     // Конец решения задачи №2.3.
 
     return {discount: discountSum, freeShipping, shipping: shippingSum, total: totalSum};
